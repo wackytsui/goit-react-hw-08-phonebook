@@ -8,7 +8,6 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #fffbf7;
 }
 
 code {
@@ -16,6 +15,7 @@ code {
     monospace;
 }
 
+/* START OF RESET CSS */
 h1,
 h2,
 h3,
@@ -24,7 +24,6 @@ h5,
 h6,
 p {
   margin: 0;
-  color: #333;
 }
 
 ul,
@@ -40,21 +39,11 @@ img {
   height: auto;
 }
 
-div {
-  margin: 50px auto;
-  width: 400px;
-  background-color: #fffafa;
-  border-radius: 15px;
+a {
+  text-decoration: none;
+  color: inherit;
+  font-weight: 700;
+  margin-right: 20px;
 }
 
-section {
-  padding: 20px;
-}
-
-h1,
-h2 {
-  padding: 30px;
-  font-weight: bold;
-  text-align: center;
-  color: #333;
-}
+/* END OF RESET CSS */

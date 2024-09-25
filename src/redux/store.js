@@ -1,28 +1,40 @@
+// store.js
 
-import { combineReducers } from 'redux';
+import {
+  persistStore,
+  persistReducer,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
 import { configureStore } from '@reduxjs/toolkit';
-import { persistStore, persistReducer } from 'redux-persist';
-import storage from 'redux-persist/lib/storage'; // defaults to localStorage for web
-import { filterSlice } from './filterSlice';
 import { contactsSlice } from './contactsSlice';
+import { filterSlice } from './filterSlice';
+import { authSlice } from './auth/authSlice';
 
-// Combine your reducers
-const rootReducer = combineReducers({
-  contacts: contactsSlice.reducer,
-  filter: filterSlice.reducer,
-});
-// Create the persist config object
-const persistConfig = {
-  key: 'root',
+// Persisting token field from auth slice to localstorage
+const authPersistConfig = {
+  key: 'auth',
   storage,
-  // You can specify which parts of your state you want to persist here
-  whitelist: ['contacts'], // In your case, you probably only want to persist contacts
+  whitelist: ['token'],
 };
-// Wrap your rootReducer with persistReducer
-const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export const store = configureStore({
-  reducer: persistedReducer,
+  reducer: {
+    auth: persistReducer(authPersistConfig, authSlice.reducer),
+    contacts: contactsSlice.reducer,
+    filter: filterSlice.reducer,
+  },
+  middleware: getDefaultMiddleware =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }),
 });
 
 export const persistor = persistStore(store);
