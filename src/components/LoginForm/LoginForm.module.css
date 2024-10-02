@@ -17,7 +17,7 @@
 .loginFormInput:hover,
 .loginFormInput:active {
     outline: none;
-    border: 2px solid #e84a5f;
+    border: 2px solid #4620f1;
 }
 
 .loginFormBtn {
@@ -29,7 +29,7 @@
 
 .loginFormBtn:hover,
 .loginFormBtn:active {
-    border-color: #e84a5f;
-    background-color: #e84a5f;
+    border-color: #4620f1;
+    background-color: #4620f1;
     color: white;
 }
